@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smaakvol · Lekkere recepten</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+
+    body {
+      background: #fef9f2;
+      color: #2e2e2e;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #4b2e1e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    header h1 i {
+      color: #e67e22;
+      font-size: 2.8rem;
+    }
+
+    .subhead {
+      font-size: 1.2rem;
+      color: #7a5a44;
+      margin-top: 0.5rem;
+      font-style: italic;
+      border-bottom: 2px dashed #f0d5b0;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+
+    /* ZOEKBALK */
+    .search-section {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 60px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      padding: 0.2rem 0.2rem 0.2rem 1.5rem;
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid #f0d5b0;
+      transition: 0.2s;
+    }
+
+    .search-wrapper:focus-within {
+      box-shadow: 0 8px 25px rgba(230, 126, 34, 0.15);
+      border-color: #e67e22;
+    }
+
+    .search-wrapper i {
+      color: #b0876b;
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
+    }
+
+    .search-wrapper input {
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      padding: 0.9rem 0;
+      flex: 1;
+      background: transparent;
+      color: #2e2e2e;
+    }
+
+    .search-wrapper input::placeholder {
+      color: #b9a392;
+      font-weight: 300;
+    }
+
+    .search-wrapper button {
+      background: #e67e22;
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 0.8rem 1.8rem;
+      border-radius: 60px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .search-wrapper button:hover {
+      background: #d35400;
+    }
+
+    /* RECEPTEN GRID */
+    .recepten-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 1.5rem 0 3rem;
+    }
+
+    .recept-kaart {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #f5e7d9;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .recept-kaart:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 35px rgba(230, 126, 34, 0.1);
+      border-color: #f7d9b8;
+    }
+
+    .kaart-afbeelding {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .kaart-content {
+      padding: 1.5rem 1.3rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kaart-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2e1f15;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-size: 0.8rem;
+      color: #8b6f5a;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px dashed #f0d5b0;
+      padding-bottom: 0.7rem;
+    }
+
+    .meta i {
+      color: #e67e22;
+      margin-right: 0.25rem;
+    }
+
+    .beschrijving {
+      color: #5c4a3c;
+      font-size: 0.92rem;
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+
+    .kaart-footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #b0876b;
+    }
+
+    /* GEEN RESULTATEN */
+    .geen-resultaten {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: white;
+      border-radius: 40px;
+      border: 1px dashed #e0cbb8;
+      color: #7a5a44;
+      font-size: 1.2rem;
+      grid-column: 1 / -1;
+    }
+
+    .geen-resultaten i {
+      font-size: 3rem;
+      color: #e0cbb8;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #f0d5b0;
+      color: #8b6f5a;
+      font-size: 0.9rem;
+    }
+
+    footer i {
+      color: #e67e22;
+    }
+
+    @media (max-width: 550px) {
+      header h1 { font-size: 2.2rem; }
+      .search-wrapper {
+        flex-wrap: wrap;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        border: none;
+        gap: 0.6rem;
+      }
+      .search-wrapper i { display: none; }
+      .search-wrapper input {
+        background: white;
+        border-radius: 60px;
+        padding: 1rem 1.5rem;
+        border: 1px solid #f0d5b0;
+        width: 100%;
+      }
+      .search-wrapper button {
+        width: 100%;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>
+        <i class="fas fa-utensils"></i> Smaakvol
+      </h1>
+      <div class="subhead">Lekkere recepten om van te genieten</div>
+    </header>
+
+    <div class="search-section">
+      <div class="search-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" id="zoekInput" placeholder="Zoek op naam of beschrijving...">
+        <button id="zoekBtn">Zoek</button>
+      </div>
+    </div>
+
+    <div id="receptenGrid" class="recepten-grid"></div>
+
+    <footer>
+      <p>Gemaakt met <i class="fas fa-heart"></i> voor liefhebbers van lekker eten</p>
+    </footer>
+  </div>
+
+  <script>
+    // ========== RECEPTEN DATA ==========
+    const recepten = [
+      {
+        bestand: "cheesecake.html",
+        naam: "New York Cheesecake",
+        tijd: "6 uur",
+        porties: 10,
+        beschrijving: "Romige, klassieke cheesecake met een koekjesbodem. Perfect met verse aardbeien.",
+        afbeelding: "https://images.unsplash.com/photo-1533134242453-ee1e6e1e3b8b?w=800&auto=format&fit=crop"
+      },
+      {
+        bestand: "romige-aardappel-ovenschotel.html",
+        naam: "Romige Aardappel-Broccoli Ovenschotel",
+        tijd: "50 min",
+        porties: 4,
+        beschrijving: "Hartverwarmende ovenschotel met aardappel, broccoli, champignons en courgette in een romige kaassaus.",
+        afbeelding: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?w=800&auto=format&fit=crop"
+      }
+    ];
+
+    const grid = document.getElementById('receptenGrid');
+    const zoekInput = document.getElementById('zoekInput');
+    const zoekBtn = document.getElementById('zoekBtn');
+
+    function renderRecepten(filter = '') {
+      const gefilterd = recepten.filter(recept => {
+        if (!filter) return true;
+        const zoekLower = filter.toLowerCase();
+        return recept.naam.toLowerCase().includes(zoekLower) ||
+               recept.beschrijving.toLowerCase().includes(zoekLower);
+      });
+
+      grid.innerHTML = '';
+
+      if (gefilterd.length === 0) {
+        grid.innerHTML = `
+          <div class="geen-resultaten">
+            <i class="fas fa-search"></i>
+            <p>Geen recepten gevonden voor "<strong>${escapeHtml(filter)}</strong>"</p>
+            <p style="font-size:0.9rem; margin-top:0.5rem;">Probeer een andere zoekterm.</p>
+          </div>
+        `;
+        return;
+      }
+
+      gefilterd.forEach(recept => {
+        const kaart = document.createElement('a');
+        kaart.href = recept.bestand;
+        kaart.className = 'recept-kaart';
+        kaart.innerHTML = `
+          <div class="kaart-afbeelding" style="background-image: url('${recept.afbeelding}');"></div>
+          <div class="kaart-content">
+            <h3>${recept.naam}</h3>
+            <div class="meta">
+              <span><i class="fas fa-clock"></i> ${recept.tijd}</span>
+              <span><i class="fas fa-user-friends"></i> ${recept.porties} pers.</span>
+            </div>
+            <p class="beschrijving">${recept.beschrijving}</p>
+            <div class="kaart-footer">
+              <span>Bekijk recept <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(kaart);
+      });
+    }
+
+    function voerZoekUit() {
+      renderRecepten(zoekInput.value.trim());
+    }
+
+    zoekBtn.addEventListener('click', voerZoekUit);
+    zoekInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') voerZoekUit();
+    });
+
+    let debounceTimer;
+    zoekInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        renderRecepten(zoekInput.value.trim());
+      }, 300);
+    });
+
+    function escapeHtml(tekst) {
+      if (!tekst) return '';
+      return tekst
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    renderRecepten();
+  </script>
+</body>
+</html>
