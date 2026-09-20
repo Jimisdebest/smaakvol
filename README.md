@@ -1,4 +1,4 @@
-//Zo zet je een recept op de homepage:
+Zo zet je een recept op de homepage:
 
 {
   bestand: "jouw-recept.html",
@@ -6,5 +6,5 @@
   tijd: "30 min",
   porties: 4,
   beschrijving: "Een korte, pakkende beschrijving van het recept.",
-  afbeelding: "https://url-naar-afbeelding.jpg"
+  afbeelding: "url-naar-afbeelding.jpg"
 }
