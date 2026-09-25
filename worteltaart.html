@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worteltaart met Roomkaasfrosting · Smaakvol</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+
+    body {
+      background: #fef9f2;
+      color: #2e2e2e;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #7a5a44;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 60px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .back-link:hover {
+      background: #f5e7d9;
+      color: #e67e22;
+    }
+
+    .recept-detail {
+      background: white;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06);
+      border: 1px solid #f5e7d9;
+    }
+
+    .detail-hero {
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+
+    .detail-hero .badge {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4b2e1e;
+      border: 1px solid #f0d5b0;
+    }
+
+    .detail-content {
+      padding: 2rem 2rem 2.5rem;
+    }
+
+    .detail-content h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #2e1f15;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      background: #fef9f2;
+      padding: 1rem 1.5rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      color: #4b2e1e;
+      font-weight: 500;
+      border: 1px solid #f0d5b0;
+    }
+
+    .detail-meta i {
+      color: #e67e22;
+      margin-right: 0.4rem;
+    }
+
+    .detail-section {
+      margin-bottom: 2rem;
+    }
+
+    .detail-section h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #4b2e1e;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 2px dashed #f0d5b0;
+      padding-bottom: 0.5rem;
+    }
+
+    .detail-section h2 i {
+      color: #e67e22;
+      font-size: 1.3rem;
+    }
+
+    .detail-section p {
+      color: #3d2c21;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .ingredienten-lijst {
+      list-style: none;
+      padding: 1.2rem 1.5rem;
+      background: #fef9f2;
+      border-radius: 24px;
+      border: 1px solid #f5e7d9;
+    }
+
+    .ingredienten-lijst li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #f5e7d9;
+      font-size: 1rem;
+      color: #3d2c21;
+    }
+
+    .ingredienten-lijst li:last-child {
+      border-bottom: none;
+    }
+
+    .ingredienten-lijst .hoeveelheid {
+      font-weight: 700;
+      color: #2e1f15;
+      min-width: 100px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .ingredienten-lijst .kopje {
+      font-weight: 700;
+      color: #e67e22;
+      padding-top: 0.4rem;
+    }
+
+    .instructies-lijst {
+      list-style: none;
+      padding: 0;
+      counter-reset: stap;
+    }
+
+    .instructies-lijst li {
+      counter-increment: stap;
+      position: relative;
+      padding: 0 0 1.5rem 3.5rem;
+    }
+
+    .instructies-lijst li::before {
+      content: counter(stap);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.4rem;
+      height: 2.4rem;
+      background: #f5e7d9;
+      color: #4b2e1e;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .instructies-lijst li:last-child {
+      padding-bottom: 0;
+    }
+
+    .instructies-lijst .stap-titel {
+      display: block;
+      font-weight: 700;
+      color: #2e1f15;
+      margin-bottom: 0.3rem;
+      font-size: 1.05rem;
+    }
+
+    .instructies-lijst .stap-tekst {
+      color: #3d2c21;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .tip-box {
+      background: #fff6e9;
+      border-left: 4px solid #e67e22;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-top: 0.5rem;
+      color: #5c4a3c;
+      font-size: 0.95rem;
+    }
+
+    .tip-box strong {
+      color: #e67e22;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #f0d5b0;
+      color: #8b6f5a;
+      font-size: 0.9rem;
+    }
+
+    footer i {
+      color: #e67e22;
+    }
+
+    @media (max-width: 600px) {
+      .detail-content { padding: 1.5rem 1.3rem 2rem; }
+      .detail-content h1 { font-size: 1.8rem; }
+      .detail-hero { height: 220px; }
+      .detail-meta {
+        gap: 0.8rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 30px;
+        font-size: 0.85rem;
+      }
+      .ingredienten-lijst { padding: 1rem 1.2rem; }
+      .ingredienten-lijst .hoeveelheid { min-width: 80px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Terug naar alle recepten
+    </a>
+
+    <article class="recept-detail">
+      <div class="detail-hero" style="background-image: url('https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=1200&auto=format&fit=crop');">
+        <span class="badge">Bakken</span>
+      </div>
+      <div class="detail-content">
+        <h1>Worteltaart met Roomkaasfrosting</h1>
+
+        <div class="detail-meta">
+          <span><i class="fas fa-clock"></i> 1 uur 15 min</span>
+          <span><i class="fas fa-user-friends"></i> 12 personen</span>
+          <span><i class="fas fa-birthday-cake"></i> Springvorm 22 cm</span>
+        </div>
+
+        <section class="detail-section">
+          <h2><i class="fas fa-info-circle"></i> Beschrijving</h2>
+          <p>Een klassieke, vochtige worteltaart met een romige frosting van roomkaas. De geraspte wortel zorgt voor een smeuïge textuur, terwijl kaneel, nootmuskaat en walnoten de smaak compleet maken. Perfect bij een kop thee of als feestelijk dessert.</p>
+        </section>
+
+        <section class="detail-section">
+          <h2><i class="fas fa-shopping-basket"></i> Ingrediënten</h2>
+          <ul class="ingredienten-lijst">
+            <li><span class="kopje">— Voor de taart —</span></li>
+            <li><span class="hoeveelheid">250 g</span><span>geraspte wortel (ongeveer 3 wortels)</span></li>
+            <li><span class="hoeveelheid">200 g</span><span>lichte basterdsuiker</span></li>
+            <li><span class="hoeveelheid">200 ml</span><span>zonnebloemolie</span></li>
+            <li><span class="hoeveelheid">4</span><span>eieren</span></li>
+            <li><span class="hoeveelheid">250 g</span><span>bloem</span></li>
+            <li><span class="hoeveelheid">2 tl</span><span>bakpoeder</span></li>
+            <li><span class="hoeveelheid">1 tl</span><span>baking soda</span></li>
+            <li><span class="hoeveelheid">2 tl</span><span>kaneelpoeder</span></li>
+            <li><span class="hoeveelheid">½ tl</span><span>nootmuskaat</span></li>
+            <li><span class="hoeveelheid">½ tl</span><span>gemberpoeder (optioneel)</span></li>
+            <li><span class="hoeveelheid">snuf</span><span>zout</span></li>
+            <li><span class="hoeveelheid">100 g</span><span>walnoten of pecannoten, grof gehakt</span></li>
+            <li><span class="kopje">— Roomkaasfrosting —</span></li>
+            <li><span class="hoeveelheid">200 g</span><span>roomkaas (op kamertemperatuur)</span></li>
+            <li><span class="hoeveelheid">100 g</span><span>zachte boter</span></li>
+            <li><span class="hoeveelheid">200 g</span><span>poedersuiker</span></li>
+            <li><span class="hoeveelheid">1 tl</span><span>vanille-extract</span></li>
+            <li><span class="kopje">— Garnering —</span></li>
+            <li><span class="hoeveelheid">handje</span><span>gehakte walnoten</span></li>
+            <li><span class="hoeveelheid">snuf</span><span>kaneelpoeder</span></li>
+          </ul>
+        </section>
+
+        <section class="detail-section">
+          <h2><i class="fas fa-list-ol"></i> Instructies</h2>
+          <ol class="instructies-lijst">
+            <li>
+              <span class="stap-titel">Oven voorverwarmen</span>
+              <span class="stap-tekst">Verwarm de oven voor op 180 °C. Vet een springvorm van 22 cm in en bekleed de bodem met bakpapier.</span>
+            </li>
+            <li>
+              <span class="stap-titel">Natte ingrediënten mengen</span>
+              <span class="stap-tekst">Klop in een grote kom de basterdsuiker met de zonnebloemolie en eieren tot een glad mengsel. Roer de geraspte wortel erdoor.</span>
+            </li>
+            <li>
+              <span class="stap-titel">Droge ingrediënten mengen</span>
+              <span class="stap-tekst">Zeef in een andere kom de bloem, bakpoeder, baking soda, kaneel, nootmuskaat, gemberpoeder en zout. Meng goed.</span>
+            </li>
+            <li>
+              <span class="stap-titel">Beslag maken</span>
+              <span class="stap-tekst">Spatel het droge mengsel voorzichtig door het natte mengsel tot alles net gemengd is. Roer de gehakte walnoten erdoor.</span>
+            </li>
+            <li>
+              <span class="stap-titel">Bakken</span>
+              <span class="stap-tekst">Giet het beslag in de springvorm en bak 45–50 minuten tot een prikker er schoon uitkomt. Laat 10 minuten afkoelen in de vorm en stort daarna op een rooster om volledig af te koelen.</span>
+            </li>
+            <li>
+              <span class="stap-titel">Frosting maken</span>
+              <span class="stap-tekst">Klop de roomkaas en boter samen tot een glad, romig mengsel. Voeg de poedersuiker en het vanille-extract toe en klop nog 2 minuten tot de frosting luchtig is.</span>
+            </li>
+            <li>
+              <span class="stap-titel">Versieren</span>
+              <span class="stap-tekst">Zet de afgekoelde taart op een schaal en verdeel de frosting over de bovenkant. Garneer met gehakte walnoten en een snufje kaneel.</span>
+            </li>
+            <li>
+              <span class="stap-titel">Serveren</span>
+              <span class="stap-tekst">Laat de taart minstens 30 minuten opstijven in de koelkast voordat je hem aansnijdt. Bewaar afgedekt in de koelkast — hij blijft 3–4 dagen lekker.</span>
+            </li>
+          </ol>
+        </section>
+
+        <section class="detail-section">
+          <h2><i class="fas fa-lightbulb"></i> Tips</h2>
+          <div class="tip-box">
+            <strong>Tip:</strong> Gebruik roomkaas en boter op kamertemperatuur voor de frosting — anders wordt hij niet mooi glad. Voor extra smaak kun je een handje rozijnen of een geraspt appeltje aan het beslag toevoegen. Wil je een dubbele laag? Bak twee kleinere taarten en smeer frosting tussen de lagen.
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <footer>
+      <p>Gemaakt met <i class="fas fa-heart"></i> voor liefhebbers van lekker eten</p>
+    </footer>
+  </div>
+</body>
+</html>
